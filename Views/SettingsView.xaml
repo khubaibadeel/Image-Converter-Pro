@@ -1,0 +1,114 @@
+<UserControl x:Class="ImageConverterPro.Views.SettingsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="1200"
+             Background="Transparent">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+            <StackPanel Width="680" HorizontalAlignment="Left">
+                <TextBlock Text="Application settings" FontSize="22" FontWeight="SemiBold" Margin="0,0,0,6"/>
+                <TextBlock Text="Changes are saved automatically." Foreground="{DynamicResource SecondaryText}" Margin="0,0,0,18"/>
+
+                <GroupBox Header="General" Margin="0,0,0,14">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Theme" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" ItemsSource="{Binding AvailableThemes}" SelectedItem="{Binding SelectedTheme}" Width="180" HorizontalAlignment="Left"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Default output format" VerticalAlignment="Center"/>
+                            <ComboBox Grid.Column="1" ItemsSource="{Binding AvailableFormats}" SelectedItem="{Binding DefaultOutputFormat}" Width="180" HorizontalAlignment="Left"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="220"/><ColumnDefinition Width="45"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Default JPEG quality" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="1" Maximum="100" Value="{Binding DefaultJpegQuality}" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding DefaultJpegQuality}" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Default background color" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Text="{Binding DefaultBackgroundColor, UpdateSourceTrigger=PropertyChanged}" Width="140" HorizontalAlignment="Left" ToolTip="Example: #FFFFFF"/>
+                        </Grid>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="*"/><ColumnDefinition Width="Auto"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Default output folder" VerticalAlignment="Center"/>
+                            <TextBox Grid.Column="1" Text="{Binding DefaultOutputDirectory, UpdateSourceTrigger=PropertyChanged}" Margin="0,0,8,0"/>
+                            <Button Grid.Column="2" Content="Browse" Command="{Binding BrowseDefaultOutputCommand}" Style="{DynamicResource SecondaryButtonStyle}"/>
+                        </Grid>
+                        <CheckBox Content="Restore previous session on startup" IsChecked="{Binding RestorePreviousSession}" Margin="210,0,0,8"/>
+                        <CheckBox Content="Remember the last conversion settings" IsChecked="{Binding RememberLastSettings}" Margin="210,0,0,8"/>
+                        <CheckBox Content="Open output folder after conversion" IsChecked="{Binding OpenOutputAfterConversion}" Margin="210,0,0,8"/>
+                        <CheckBox Content="Show desktop notifications" IsChecked="{Binding ShowNotifications}" Margin="210,0,0,0"/>
+                        <Grid Margin="0,12,0,0">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="220"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Maximum recent files" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="1" Maximum="50" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding MaximumRecentFiles}" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding MaximumRecentFiles}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Preview" Margin="0,0,0,14">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="220"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Default zoom level" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="0.25" Maximum="4" SmallChange="0.25" Value="{Binding DefaultZoomLevel}" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding DefaultZoomLevel, StringFormat={}{0:0.00}x}" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="220"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Thumbnail size" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="64" Maximum="512" TickFrequency="32" Value="{Binding ThumbnailSize}" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding ThumbnailSize, StringFormat={}{0}px}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="Performance" Margin="0,0,0,14">
+                    <StackPanel>
+                        <Grid Margin="0,0,0,12">
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="220"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Maximum parallel jobs" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="1" Maximum="8" TickFrequency="1" IsSnapToTickEnabled="True" Value="{Binding MaximumParallelConversions}" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding MaximumParallelConversions}" VerticalAlignment="Center"/>
+                        </Grid>
+                        <Grid>
+                            <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="220"/><ColumnDefinition Width="55"/></Grid.ColumnDefinitions>
+                            <TextBlock Text="Cache size" VerticalAlignment="Center"/>
+                            <Slider Grid.Column="1" Minimum="0" Maximum="4096" TickFrequency="128" Value="{Binding CacheSizeMb}" Margin="0,0,12,0"/>
+                            <TextBlock Grid.Column="2" Text="{Binding CacheSizeMb, StringFormat={}{0} MB}" VerticalAlignment="Center"/>
+                        </Grid>
+                    </StackPanel>
+                </GroupBox>
+
+                <GroupBox Header="About">
+                    <Grid>
+                        <Grid.ColumnDefinitions><ColumnDefinition Width="210"/><ColumnDefinition Width="*"/></Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions><RowDefinition Height="Auto"/><RowDefinition Height="12"/><RowDefinition Height="Auto"/></Grid.RowDefinitions>
+                        <TextBlock Text="Version" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="1" Text="{Binding ApplicationVersion}" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Text="Developer" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding DeveloperInformation}" VerticalAlignment="Center"/>
+                    </Grid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,16,0,0">
+            <Button Content="Reset defaults" Command="{Binding ResetToDefaultsCommand}" Style="{DynamicResource SecondaryButtonStyle}" Margin="0,0,8,0"/>
+            <Button Content="Save now" Command="{Binding SaveSettingsCommand}" Style="{DynamicResource PrimaryButtonStyle}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

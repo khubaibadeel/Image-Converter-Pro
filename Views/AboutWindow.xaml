@@ -1,0 +1,37 @@
+<Window x:Class="ImageConverterPro.Views.AboutWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="About Image Converter Pro"
+        Width="430" Height="330"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Icon="/Resources/AppIcon.ico"
+        Background="{DynamicResource WindowBackground}">
+    <Border Style="{DynamicResource PanelStyle}" Margin="14" Padding="24">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <Image Source="/Resources/AppIcon.png" Width="48" Height="48" Margin="0,0,14,0"/>
+                <StackPanel VerticalAlignment="Center">
+                    <TextBlock Text="Image Converter Pro" FontSize="21" FontWeight="SemiBold"/>
+                    <TextBlock Text="Version 1.0.0" Foreground="{DynamicResource SecondaryText}" Margin="0,4,0,0"/>
+                </StackPanel>
+            </StackPanel>
+            <TextBlock Grid.Row="1" Text="Professional image conversion and editing for Windows." Foreground="{DynamicResource SecondaryText}" Margin="0,22,0,0" TextWrapping="Wrap"/>
+            <StackPanel Grid.Row="2" Margin="0,18,0,0">
+                <TextBlock Text="Built with" FontWeight="SemiBold" Margin="0,0,0,8"/>
+                <TextBlock Text=".NET 8  •  WPF  •  SixLabors.ImageSharp  •  EF Core SQLite" Foreground="{DynamicResource SecondaryText}" TextWrapping="Wrap"/>
+                <TextBlock Text="Developer: Image Converter Pro" Foreground="{DynamicResource SecondaryText}" Margin="0,12,0,0"/>
+            </StackPanel>
+            <StackPanel Grid.Row="3" Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Website" Click="Website_Click" Style="{DynamicResource SecondaryButtonStyle}" Margin="0,0,8,0"/>
+                <Button Content="Close" Click="Close_Click" Style="{DynamicResource PrimaryButtonStyle}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,47 @@
+<Application x:Class="ImageConverterPro.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:ImageConverterPro.Converters">
+
+    <Application.Resources>
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Theme must remain first because App.SwitchTheme replaces only the theme dictionary. -->
+                <ResourceDictionary Source="/Themes/LightTheme.xaml"/>
+
+                <!-- Shared application styles must never be cleared during theme switching. -->
+                <ResourceDictionary Source="/Themes/SharedStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!-- Existing global converters -->
+            <local:IndexToBoolConverter
+                x:Key="IndexToBoolConverter"/>
+
+            <local:BoolToVisibilityConverter
+                x:Key="BoolToVisibilityConverter"/>
+
+            <local:StatusToColorConverter
+                x:Key="StatusToColorConverter"/>
+
+            <local:EnumToStringConverter
+                x:Key="EnumToStringConverter"/>
+
+            <!-- Missing runtime resources.
+                 The resource keys intentionally match the keys already used by the XAML. -->
+            <local:InverseBooleanToVisibilityConverter
+                x:Key="InverseBoolToVisibilityConverter"/>
+
+            <local:ByteSizeToStringConverter
+                x:Key="FileSizeConverter"/>
+
+            <local:NullToInverseVisibilityConverter
+                x:Key="NullToInverseVisibilityConverter"/>
+
+            <local:NullToVisibilityConverter
+                x:Key="NullToVisibilityConverter"/>
+
+        </ResourceDictionary>
+    </Application.Resources>
+
+</Application>
